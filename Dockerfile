@@ -1,27 +1,10 @@
-FROM amazoncorretto:21 AS build
-
-RUN yum install -y tar which gzip \
-  && curl -fsSL https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz \
-  | tar -xzC /usr/share/maven --strip-components=1 \
-  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
-
-
+FROM maven:3.9.6-eclipse-temurin-21-jammy as build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -X -DskipTests
 
-COPY curriculo/pom.xml .
-COPY curriculo/src ./src
-
-
-RUN mvn clean package -DskipTests
-
-FROM amazoncorretto:21
-
+FROM openjdk:21-jdk
 WORKDIR /app
-
-COPY --from=build /app/target/*.jar app.jar
-
-ENV PORT 8080
-
+COPY --from=build ./app/target/*.jar ./curriculo*.jar
 EXPOSE 8080
-
-CMD ["java", "-Dserver.port=${PORT}", "-jar", "app.jar"]
+ENTRYPOINT java -jar curriculo*.jar
