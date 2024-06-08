@@ -1,6 +1,6 @@
-FROM maven:3.9.7-eclipse-temurin-21 AS build
+FROM maven:3.8.5-openjdk-21-slim AS build
 
-WORKDIR /curriculo
+WORKDIR /app
 
 COPY curriculo/pom.xml .
 COPY curriculo/src ./src
@@ -9,12 +9,12 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
 
-WORKDIR /curriculo
+WORKDIR /app
 
-COPY --from=build /curriculo/target/*.jar curriculo.jar
+COPY --from=build /app/target/*.jar app.jar
 
 ENV PORT 8080
 
 EXPOSE 8080
 
-CMD ["java", "-Dserver.port=${PORT}", "-jar", "curriculo.jar"]
+CMD ["java", "-Dserver.port=${PORT}", "-jar", "app.jar"]
