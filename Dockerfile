@@ -1,13 +1,20 @@
-FROM maven:3.8.5-openjdk-21-slim AS build
+FROM amazoncorretto:21 AS build
+
+RUN yum install -y tar which gzip \
+  && curl -fsSL https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz \
+  | tar -xzC /usr/share/maven --strip-components=1 \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
 
 WORKDIR /app
 
 COPY curriculo/pom.xml .
 COPY curriculo/src ./src
 
+
 RUN mvn clean package -DskipTests
 
-FROM openjdk:21-jdk-slim
+FROM amazoncorretto:21
 
 WORKDIR /app
 
