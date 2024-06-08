@@ -1,9 +1,7 @@
-package Service;
+package com.example.curriculo.Service;
 
-import Model.Idiomas;
-import Model.User;
-import Repository.IdiomasRepository;
-import Repository.UserRepository;
+import com.example.curriculo.Model.Idiomas;
+import com.example.curriculo.Repository.IdiomasRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

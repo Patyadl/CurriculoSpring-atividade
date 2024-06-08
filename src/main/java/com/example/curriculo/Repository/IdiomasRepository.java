@@ -1,7 +1,6 @@
-package Repository;
+package com.example.curriculo.Repository;
 
-import Model.Idiomas;
-import org.apache.catalina.User;
+import com.example.curriculo.Model.Idiomas;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

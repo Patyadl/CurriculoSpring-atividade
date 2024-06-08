@@ -1,7 +1,7 @@
-package Service;
+package com.example.curriculo.Service;
 
-import Model.Cursos;
-import Repository.CursosRepository;
+import com.example.curriculo.Model.Cursos;
+import com.example.curriculo.Repository.CursosRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

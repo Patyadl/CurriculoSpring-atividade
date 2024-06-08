@@ -1,16 +1,13 @@
-package Controller;
+package com.example.curriculo.Controller;
 
-
-import Model.Idiomas;
-import Service.IdiomasService;
+import com.example.curriculo.Model.Idiomas;
+import com.example.curriculo.Service.IdiomasService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/idiomas")
 public class IdiomasController {
 
@@ -23,8 +20,8 @@ public class IdiomasController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Idiomas> getIdiomasById(@PathVariable Long id) {
-        return idiomasService.getIdiomasById(id);
+    public Idiomas getIdiomasById(@PathVariable Long id) {
+        return idiomasService.getIdiomasById(id).orElse(null);
     }
 
     @PostMapping
@@ -33,13 +30,12 @@ public class IdiomasController {
     }
 
     @PutMapping("/{id}")
-    public Idiomas atualizarIdiomas(@PathVariable Long id, @RequestBody Idiomas idiomasDetails) throws Exception {
-        return idiomasService.atualizarIdiomas(id, idiomasDetails);
+    public Idiomas atualizarIdioma(@PathVariable Long id, @RequestBody Idiomas idiomasDetails) throws Exception {
+        return idiomasService.atualizarIdiomas(id,idiomasDetails);
     }
-
 
     @DeleteMapping("/{id}")
     public void deletarIdiomas(@PathVariable Long id) {
-        idiomasService.deletarIdiomas(id);
+       idiomasService.deletarIdiomas(id);
     }
 }

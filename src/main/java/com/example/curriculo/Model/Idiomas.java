@@ -1,10 +1,11 @@
-package Model;
+package com.example.curriculo.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "idiomas")
 public class Idiomas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

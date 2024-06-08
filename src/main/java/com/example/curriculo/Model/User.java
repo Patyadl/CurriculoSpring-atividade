@@ -1,12 +1,12 @@
-package Model;
+package com.example.curriculo.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Usuario")
 @Data
 public class User {
     @Id
@@ -14,7 +14,7 @@ public class User {
     private Long id;
 
     private String nome;
-    private String idade;
+    private int idade;
     private String email;
     private String telefone;
 
